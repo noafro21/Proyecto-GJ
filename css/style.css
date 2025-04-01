@@ -1,6 +1,6 @@
 /* styles.css */
 body {
-  font-family: Arial, sans-serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   text-align: center;
   padding: 20px;
   -webkit-transition: background 2s ease-in-out;
@@ -9,24 +9,67 @@ body {
   /* Transición suave */
 }
 
-/*Contenedor del título con fondo dinámico */
-#titulo-container {
-  width: 100%;
-  height: 150px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+/* 🏷️ Estilo del texto */
+
+
+.raindrop {
+  position: absolute;
+  width: 2px;
+  height: 15px;
+  background-color: rgba(255, 255, 255, 0.6);
+  opacity: 0.7;
+  -webkit-animation: fall linear infinite;
+  animation: fall linear infinite;
+}
+
+.telefono {
+  text-decoration: none;
+  /* Elimina el subrayado del enlace */
+  color: #681e1e;
+  /* Azul inicial */
+  font-weight: bold;
+  -webkit-transition: color 0.3s ease;
+  -o-transition: color 0.3s ease;
+  transition: color 0.3s ease;
+  /* Transición suave del color */
+}
+
+.telefono:hover {
+  color: #ff4500;
+  /* Cambia a naranja al pasar el cursor */
+}
+
+.card {
   position: relative;
-  -webkit-transition: background-color 2s ease-in-out;
-  -o-transition: background-color 2s ease-in-out;
-  transition: background-color 2s ease-in-out;
-  /* Transición para el color del título */
+  margin-top: 200px;
+  background-color: rgb(126, 91, 49);
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 20px;
+  width: 400px;
+  height: 230px;
+}
+
+.icono {
+  width: 20px;
+  height: 20px;
+  text-align: left;
+}
+
+/*.header {}*/
+
+.title {
+  text-align: justify;
+  padding: 15px;
+  color: hsl(0, 17%, 93%);
+  background-color: #270c0c;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.footer {
+  color: #681e1e;
+  margin-top: 20px;
 }
 
 /*Contenedor de la lluvia en toda la pantalla de ancho pero con altura limitada */
@@ -48,10 +91,22 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  /*z-index: -1;*/
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+#fecha-hora {
+  
+  margin-top: 40px;
+  padding: 20px 0;
+  color: hsl(0, 17%, 93%);
+  background-color: #270c0c;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-top: 3px solid hsl(0, 17%, 93%);
+
 }
 
 @-webkit-keyframes fall {
@@ -70,29 +125,12 @@ body {
   }
 }
 
-/* 🏷️ Estilo del texto */
-h1 {
-  font-size: 36px;
-  font-weight: bold;
-  color: white;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-}
-
-.raindrop {
-  position: absolute;
-  width: 2px;
-  height: 15px;
-  background-color: rgba(255, 255, 255, 0.6);
-  opacity: 0.7;
-  -webkit-animation: fall linear infinite;
-  animation: fall linear infinite;
-}
-
 /*Estilos para móviles */
 @media (max-width: 600px) {
   body {
     font-size: 16px;
     padding: 10px;
+    width: 100%;
   }
 
   h1 {
@@ -132,21 +170,4 @@ h1 {
   p {
     font-size: 18px;
   }
-}
-
-.telefono {
-  text-decoration: none;
-  /* Elimina el subrayado del enlace */
-  color: #007bff;
-  /* Azul inicial */
-  font-weight: bold;
-  -webkit-transition: color 0.3s ease;
-  -o-transition: color 0.3s ease;
-  transition: color 0.3s ease;
-  /* Transición suave del color */
-}
-
-.telefono:hover {
-  color: #ff4500;
-  /* Cambia a naranja al pasar el cursor */
 }

@@ -1,28 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grupo Jiménez</title>
-    <link rel="stylesheet" href="css/style.css">
-  </head>
 
-  <body>
-    <div id="fondo-clima"></div>
-   
-    <div id="rain-container"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grupo Jiménez</title>
+  <link rel="stylesheet" href="css/normalize.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
 
-    <div id="titulo-container">
-      <h1>Grupo Jiménez</h1>
-    </div>
-    <p><strong>Teléfonos:</strong></p>
-    <p><a href="tel:+50622210363" class="telefono">+50622210363</a></p>
-    <p><a href="tel:+50622213427" class="telefono">+50622213427</a></p>
-    <p><strong>Ubicación:</strong> Morazán, San José. Costa Rica</p>
+<body>
+  <div id="fondo-clima"></div>
 
-    <footer>
+  <div id="rain-container"></div>
+
+  <article class="card">
+    <header class="header">
+      <h1 class="title">Grupo Jiménez</h1>
+    </header>
+    <img src="assets/phone-solid.svg" alt="phon" class="icono">
+    <a href="tel:+50622210363" class="telefono">+50622210363</a>
+    <a href="tel:+50622213427" class="telefono">+50622213427</a>
+
+
+    <footer class="footer">
+      <img src="assets/location-dot-solid.svg" alt="localización" class="icono">
+      Morazán, San José. Costa Rica
       <p id="fecha-hora"></p>
     </footer>
-    <script src="js/script.js"></script>
-  </body>
+  </article>
+  <script src="js/script.js"></script>
+</body>
+
 </html>

@@ -23,8 +23,8 @@ async function obtenerClima() {
         }
 
         //Si está nublado, cambia el fondo del clima
-        if ([45, 48].includes(clima)) { 
-            document.getElementById("fondo-clima").style.backgroundImage = "url('img/nubes.png')";
+        if ([45, 48].includes(clima)) {
+            document.getElementById("fondo-clima").style.backgroundImage = "url('assets/nubes.jpg')";
             colorFondoBody = "#B0C4DE"; // Azul grisáceo
         } else {
             document.getElementById("fondo-clima").style.backgroundImage = "none";
@@ -64,12 +64,13 @@ function iniciarLluvia() {
 }
 
 //Función corregida para mostrar nubes
-function mostrarNubes() {
+/*function mostrarNubes() {
+    
     document.getElementById("fondo-clima").style.backgroundImage = "url('assets/nubes.jpg')";
     document.getElementById("fondo-clima").style.backgroundSize = "cover";
     document.getElementById("fondo-clima").style.backgroundRepeat = "no-repeat";
     document.getElementById("fondo-clima").style.backgroundPosition = "center";
-}
+}*/
 
 //Función para actualizar la hora en tiempo real
 function actualizarHora() {
@@ -86,4 +87,7 @@ setInterval(actualizarHora, 1000);
 
 //Ejecutar funciones
 obtenerClima();
+iniciarLluvia();
+//mostrarNubes();
 actualizarHora();
+
