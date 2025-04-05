@@ -4,31 +4,51 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sitio web oficial de Grupo Jiménez, Costa Rica" />
+  <meta property="og:title" content="Grupo Jiménez" />
+  <meta property="og:description" content="Información de contacto de Grupo Jiménez" />
   <title>Grupo Jiménez</title>
-  <link rel="stylesheet" href="css/normalize.css" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="assets/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
-  <div id="fondo-clima"></div>
+  <!-- Elementos de fondo y efectos -->
+  <div id="fondo-clima" aria-hidden="true"></div>
+  <div id="rain-container" aria-hidden="true"></div>
 
-  <div id="rain-container"></div>
+  <!-- Contenido principal -->
+  <main>
+    <article class="card">
+      <header class="header">
+        <h1 class="title">Grupo Jiménez</h1>
+      </header>
 
-  <article class="card">
-    <header class="header">
-      <h1 class="title">Grupo Jiménez</h1>
-    </header>
-    <img src="assets/phone-solid.svg" alt="phon" class="icono">
-    <a href="tel:+50622210363" class="telefono">+50622210363</a>
-    <a href="tel:+50622213427" class="telefono">+50622213427</a>
+      <!-- Sección de contacto telefónico -->
+      <section class="contacto">
+        <h2 class="visually-hidden">Contacto Telefónico</h2>
+        <div class="telefonos">
+          <img src="assets/phone-solid.svg" alt="teléfono" class="icono">
+          <div class="numeros">
+            <a href="tel:+50622210363" class="telefono">+506 2221 0363</a>
+            <a href="tel:+50622213427" class="telefono">+506 2221 3427</a>
+          </div>
+        </div>
+      </section>
 
+      <!-- Pie de página con ubicación y fecha -->
+      <footer class="footer">
+        <address>
+          <img src="assets/location-dot-solid.svg" alt="localización" class="icono">
+          <span>Morazán, San José. Costa Rica</span>
+        </address>
+        <p id="fecha-hora"></p>
+      </footer>
+    </article>
+  </main>
 
-    <footer class="footer">
-      <img src="assets/location-dot-solid.svg" alt="localización" class="icono">
-      Morazán, San José. Costa Rica
-      <p id="fecha-hora"></p>
-    </footer>
-  </article>
   <script src="js/script.js"></script>
 </body>
 

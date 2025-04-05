@@ -1,4 +1,4 @@
-async function obtenerClima() { 
+async function obtenerClima() {
     try {
         const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=9.93&longitude=-84.08&current_weather=true');
         const data = await response.json();
@@ -6,7 +6,7 @@ async function obtenerClima() {
         const clima = data.current_weather.weathercode;
 
         let colorFondoBody, colorTitulo;
-        
+
         //Define los colores según la hora
         if (hora >= 6 && hora < 16) { // Día claro
             colorFondoBody = "#87CEEB"; // Celeste
@@ -38,8 +38,12 @@ async function obtenerClima() {
 
         //Aplica un degradado entre el fondo del cuerpo y el título
         document.body.style.background = `linear-gradient(to bottom, ${colorFondoBody}, ${colorTitulo})`;
-        document.getElementById("titulo-container").style.backgroundColor = colorTitulo
-        
+        // Aplicar color al título
+        const headerElement = document.querySelector('.header');
+        if (headerElement) {
+            headerElement.style.backgroundColor = colorTitulo;
+        }
+
     } catch (error) {
         console.error("Error obteniendo el clima:", error);
     }
@@ -65,7 +69,7 @@ function iniciarLluvia() {
 
 //Función corregida para mostrar nubes
 /*function mostrarNubes() {
-    
+
     document.getElementById("fondo-clima").style.backgroundImage = "url('assets/nubes.jpg')";
     document.getElementById("fondo-clima").style.backgroundSize = "cover";
     document.getElementById("fondo-clima").style.backgroundRepeat = "no-repeat";
