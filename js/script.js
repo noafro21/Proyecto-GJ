@@ -4,6 +4,7 @@
  * - Obtención de datos climáticos
  * - Efectos visuales según clima y hora
  * - Actualización de fecha y hora en tiempo real
+ * - Menú móvil responsivo
  */
 
 // Esperar a que el DOM esté completamente cargado
@@ -16,10 +17,45 @@ function inicializarApp() {
   // Iniciar funciones principales
   obtenerClima();
   actualizarHora();
+  inicializarMenuMovil();
 
   // Configurar actualizaciones periódicas
   setInterval(actualizarHora, 1000); // Actualizar hora cada segundo
   setInterval(obtenerClima, 600000); // Actualizar clima cada 10 minutos
+}
+
+/**
+ * Inicializa la funcionalidad del menú móvil
+ */
+function inicializarMenuMovil() {
+  const menuToggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('.header_menu nav');
+
+  if (menuToggle && nav) {
+    menuToggle.addEventListener('click', () => {
+      nav.classList.toggle('show');
+
+      // Cambiar el texto del botón según el estado
+      if (nav.classList.contains('show')) {
+        menuToggle.innerHTML = '✕';
+        menuToggle.setAttribute('aria-label', 'Cerrar menú');
+      } else {
+        menuToggle.innerHTML = '☰';
+        menuToggle.setAttribute('aria-label', 'Abrir menú');
+      }
+    });
+
+    // Cerrar el menú cuando se hace clic en un enlace
+    const menuLinks = nav.querySelectorAll('a');
+    menuLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        // Solo cerrar el menú, no prevenir la navegación por defecto
+        nav.classList.remove('show');
+        menuToggle.innerHTML = '☰';
+        menuToggle.setAttribute('aria-label', 'Abrir menú');
+      });
+    });
+  }
 }
 
 /**
