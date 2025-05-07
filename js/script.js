@@ -22,6 +22,14 @@ function inicializarApp() {
   // Configurar actualizaciones periódicas
   setInterval(actualizarHora, 1000); // Actualizar hora cada segundo
   setInterval(obtenerClima, 600000); // Actualizar clima cada 10 minutos
+
+  // Iniciar lluvia inmediatamente (para pruebas)
+  // Puedes comentar estas líneas cuando quieras que funcione solo con la API
+  setTimeout(() => {
+    console.log("Iniciando lluvia manualmente para pruebas");
+    iniciarLluvia();
+    mostrarNubes();
+  }, 1000);
 }
 
 /**
@@ -72,7 +80,17 @@ async function obtenerClima() {
 
     const data = await response.json();
     const hora = new Date().getHours();
-    const clima = data.current_weather.weathercode;
+    let clima = data.current_weather.weathercode;
+
+    console.log("Código de clima recibido:", clima);
+
+    // TEMPORAL: Si está lloviendo actualmente, forzar el código de lluvia
+    // Puedes comentar estas líneas cuando quieras que vuelva a funcionar automáticamente
+    const estaLloviendo = true; // Cambiar a false cuando no esté lloviendo
+    if (estaLloviendo) {
+      console.log("Forzando efecto de lluvia");
+      clima = 61; // Código para lluvia ligera
+    }
 
     // Aplicar estilos según hora y clima
     aplicarEstilosPorHora(hora);
@@ -82,6 +100,11 @@ async function obtenerClima() {
     console.error("Error obteniendo el clima:", error);
     // Usar valores predeterminados en caso de error
     aplicarEstilosPorHora(new Date().getHours());
+
+    // TEMPORAL: Forzar lluvia incluso en caso de error
+    console.log("Forzando efecto de lluvia después de error");
+    iniciarLluvia();
+    mostrarNubes();
   }
 }
 
@@ -142,24 +165,67 @@ function aplicarEstilosPorClima(codigoClima) {
  * Inicia el efecto de lluvia
  */
 function iniciarLluvia() {
+  console.log("Iniciando efecto de lluvia");
   const rainContainer = document.getElementById("rain-container");
+
+  if (!rainContainer) {
+    console.error("No se encontró el contenedor de lluvia");
+    return;
+  }
+
+  // Asegurarse de que el contenedor sea visible
+  rainContainer.style.display = "block";
+  rainContainer.style.zIndex = "0";
   rainContainer.innerHTML = ""; // Limpia la lluvia anterior
+
+  // Detener cualquier intervalo anterior
+  if (window.lluviaInterval) {
+    clearInterval(window.lluviaInterval);
+  }
+
+  // Crear gotas iniciales
+  for (let i = 0; i < 50; i++) {
+    crearGotaDeLluvia(rainContainer);
+  }
 
   // Crear identificador único para este intervalo
   window.lluviaInterval = setInterval(() => {
-    const drop = document.createElement("div");
-    drop.classList.add("raindrop");
-    drop.style.left = Math.random() * 100 + "vw";
-    drop.style.animationDuration = (Math.random() * 2 + 2) + "s";
-    rainContainer.appendChild(drop);
+    crearGotaDeLluvia(rainContainer);
+  }, 50); // Crear gotas más frecuentemente
 
-    // Eliminar gotas después de caer para evitar sobrecarga del DOM
-    setTimeout(() => {
-      if (drop && drop.parentNode) {
-        drop.remove();
-      }
-    }, 2000);
-  }, 100);
+  console.log("Efecto de lluvia iniciado");
+}
+
+/**
+ * Crea una gota de lluvia y la añade al contenedor
+ * @param {HTMLElement} container - El contenedor donde añadir la gota
+ */
+function crearGotaDeLluvia(container) {
+  const drop = document.createElement("div");
+  drop.classList.add("raindrop");
+
+  // Posición horizontal aleatoria
+  drop.style.left = Math.random() * 100 + "vw";
+
+  // Duración de la animación aleatoria
+  const duracion = Math.random() * 1.5 + 1; // Entre 1 y 2.5 segundos
+  drop.style.animationDuration = duracion + "s";
+
+  // Tamaño aleatorio para dar sensación de profundidad
+  const escala = Math.random() * 0.5 + 0.5; // Entre 0.5 y 1
+  drop.style.height = (15 * escala) + "px";
+  drop.style.width = (2 * escala) + "px";
+  drop.style.opacity = 0.7 + (escala * 0.3); // Más opaco si es más grande
+
+  // Añadir al contenedor
+  container.appendChild(drop);
+
+  // Eliminar gotas después de caer para evitar sobrecarga del DOM
+  setTimeout(() => {
+    if (drop && drop.parentNode) {
+      drop.remove();
+    }
+  }, duracion * 1000 + 500); // Tiempo de animación + margen
 }
 
 /**
