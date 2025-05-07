@@ -1,0 +1,247 @@
+/* Estilos específicos para la página de contacto */
+
+/* Contenedor principal del formulario */
+.contact-container {
+  background-color: var(--color-background);
+  border-radius: var(--border-radius);
+  box-shadow: 8px 8px 15px rgba(39, 63, 79, 0.5);
+  width: 100%;
+  max-width: 800px;
+  margin: 100px auto 20px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Barra lateral decorativa */
+.contact-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 10px;
+  background-color: var(--color-primary);
+}
+
+/* Encabezado del formulario */
+.contact-header {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.contact-header h2 {
+  color: var(--color-primary);
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.contact-header p {
+  color: var(--color-text-light);
+  font-size: 1.1rem;
+}
+
+/* Estilos del formulario */
+.contact-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+
+
+/* Campos que ocupan todo el ancho */
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--color-text-light);
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid rgba(239, 238, 234, 0.2);
+  border-radius: var(--border-radius);
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--color-text-light);
+  font-family: inherit;
+  transition: border-color var(--transition-speed);
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(254, 119, 67, 0.3);
+}
+
+.form-group textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+/* Grupo de teléfono con selector de país */
+.phone-group {
+  display: flex;
+}
+
+.country-select {
+  width: 80px;
+  border-right: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.phone-input {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* Checkbox personalizado */
+.checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.custom-checkbox {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(239, 238, 234, 0.3);
+  border-radius: 4px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.custom-checkbox.checked {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.custom-checkbox.checked::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 14px;
+}
+
+.checkbox-group label {
+  color: var(--color-text-light);
+  font-size: 0.9rem;
+}
+
+.checkbox-group a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.checkbox-group a:hover {
+  text-decoration: underline;
+}
+
+/* Botón de envío */
+.submit-button {
+  grid-column: 1 / -1;
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 15px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transition-speed);
+  margin-top: 20px;
+}
+
+.submit-button:hover {
+  background-color: rgb(230, 100, 50);
+}
+
+/* Mensajes de error y éxito */
+.error-message {
+  color: #ff4d4d;
+  font-size: 0.85rem;
+  margin-top: 5px;
+}
+
+.form-group input.error,
+.form-group textarea.error,
+.form-group select.error {
+  border-color: #ff4d4d;
+}
+
+.success-message {
+  background-color: rgba(46, 204, 113, 0.2);
+  color: #2ecc71;
+  padding: 15px;
+  border-radius: var(--border-radius);
+  margin-bottom: 20px;
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.success-message.fade-out {
+  animation: fadeOut 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-10px); }
+}
+
+/* Estilos para el pie de página con fecha y hora */
+#fecha-hora {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
+  padding: 10px 0;
+  text-align: center;
+  font-size: 0.9rem;
+  z-index: 900;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#fecha-hora p {
+  margin: 0;
+  padding: 0;
+}
+
+/* Ajuste para que el contenido principal no quede oculto por el pie de página fijo */
+main {
+  padding-bottom: 50px; /* Altura aproximada del pie de página */
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .contact-container {
+    padding: 30px 20px;
+    margin-top: 80px;
+    margin-bottom: 60px; /* Espacio adicional para el pie de página en móviles */
+  }
+
+  .contact-form {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contacta con Grupo Jiménez, Costa Rica">
+  <meta property="og:title" content="Contacto - Grupo Jiménez">
+  <meta property="og:description" content="Formulario de contacto de Grupo Jiménez">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#273F4F">
+  <title>Contacto - Grupo Jiménez</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="assets/favicon.ico" type="image/x-icon">
+
+  <!-- Fuente de Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/contacto.css">
+</head>
+<body>
+  <!-- Menú de navegación -->
+  <header class="header_menu">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <img src="assets/logo.svg" alt="Logo Grupo Jiménez">
+        Grupo Jiménez
+      </a>
+      <button class="menu-toggle" aria-label="Abrir menú">
+        ☰
+      </button>
+      <nav>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#acerca-de-nosotros">Acerca de nosotros</a></li>
+          <li><a href="#" class="active">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Elementos de fondo y efectos -->
+  <div id="fondo-clima" aria-hidden="true" role="presentation"></div>
+  <div id="rain-container" aria-hidden="true" role="presentation"></div>
+
+  <!-- Contenido principal -->
+  <main>
+    <div class="contact-container">
+      <div class="contact-header">
+        <h2>Contacta con nosotros</h2>
+        <p>Estamos aquí para ayudarte. Completa el formulario y nos pondremos en contacto contigo lo antes posible.</p>
+      </div>
+
+      <form action="#" method="POST" class="contact-form">
+        <div class="form-group">
+          <label for="first-name">Nombre</label>
+          <input type="text" name="first-name" id="first-name" autocomplete="given-name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="last-name">Apellidos</label>
+          <input type="text" name="last-name" id="last-name" autocomplete="family-name" required>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="company">Empresa</label>
+          <input type="text" name="company" id="company" autocomplete="organization">
+        </div>
+
+        <div class="form-group full-width">
+          <label for="email">Correo electrónico</label>
+          <input type="email" name="email" id="email" autocomplete="email" required>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="phone-number">Número de teléfono</label>
+          <div class="phone-group">
+            <select id="country" name="country" class="country-select">
+              <option value="+506">CR</option>
+              <option value="+1">US</option>
+              <option value="+34">ES</option>
+            </select>
+            <input type="tel" name="phone-number" id="phone-number" class="phone-input" placeholder="2221-0363">
+          </div>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="message">Mensaje</label>
+          <textarea name="message" id="message" rows="4" required></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <div class="checkbox-group">
+            <div class="custom-checkbox" id="privacy-checkbox" tabindex="0" role="checkbox" aria-checked="false"></div>
+            <label for="privacy-checkbox">
+              Al seleccionar esto, aceptas nuestra <a href="#">política de privacidad</a>.
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-button">Enviar mensaje</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Pie de página con fecha y hora -->
+  <footer id="fecha-hora">
+    <p aria-live="polite"></p>
+  </footer>
+
+  <!-- Scripts JavaScript -->
+  <script src="js/script.js" defer></script>
+  <script src="js/contacto.js" defer></script>
+</body>
+</html>
