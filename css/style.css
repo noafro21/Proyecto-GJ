@@ -26,7 +26,6 @@ body {
   min-height: 100vh;
   display: flex;
   font-family: "Roboto", sans-serif;
-  font-optical-sizing: auto;
   font-weight: 100;
   font-style: normal;
   font-variation-settings: "wdth" 100;
@@ -35,10 +34,121 @@ body {
   align-items: center;
   padding: 20px;
 }
+/* Estilos para el menú */
+.header_menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--color-background);
+  color: var(--color-text-light);
+  padding: 15px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  border-bottom: 3px solid var(--color-primary);
+}
+
+.header_menu .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.header_menu .logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.header_menu .logo img {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.header_menu nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header_menu nav li {
+  margin-left: 20px;
+}
+
+.header_menu nav a {
+  display: block; /* común para desktop y móvil */
+  color: var(--color-text-light);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 15px;
+  border-radius: var(--border-radius);
+  transition: all var(--transition-speed);
+}
+
+.header_menu nav a:hover,
+.header_menu nav a.active {
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
+}
+
+.header_menu .menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--color-text-light);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .header_menu .menu-toggle {
+    display: block;
+  }
+
+  .header_menu nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--color-background);
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-speed);
+  }
+
+  .header_menu nav.show {
+    max-height: 300px;
+    border-bottom: 3px solid var(--color-primary);
+  }
+
+  .header_menu nav ul {
+    flex-direction: column;
+    padding: 10px 0;
+  }
+
+  .header_menu nav li {
+    margin: 0;
+  }
+
+  .header_menu nav a {
+    padding: 12px 20px;
+    border-radius: 0;
+  }
+}
 
 /* Tarjeta principal */
 .card {
   position: absolute;
+  left: 35%;
   background-color: var(--color-background);
   border-radius: var(--border-radius);
   box-shadow: 8px 8px 15px rgb(39, 63, 79);
