@@ -1,4 +1,13 @@
-/* Estilos específicos para la página de contacto */
+ /* Estilos específicos para la página de contacto */
+
+ * {
+  box-sizing: border-box;
+
+}
+ /* Ajuste para que el contenido principal no quede oculto por el pie de página fijo */
+main {
+  padding-bottom: 50px; /* Altura aproximada del pie de página */
+}
 
 /* Contenedor principal del formulario */
 .contact-container {
@@ -228,10 +237,6 @@
   padding: 0;
 }
 
-/* Ajuste para que el contenido principal no quede oculto por el pie de página fijo */
-main {
-  padding-bottom: 50px; /* Altura aproximada del pie de página */
-}
 
 /* Estilos responsivos */
 @media (max-width: 768px) {

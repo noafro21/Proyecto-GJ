@@ -15,18 +15,26 @@ document.addEventListener('DOMContentLoaded', inicializarApp);
  */
 function inicializarApp() {
   // Iniciar funciones principales
-  obtenerClima();
+  obtenerUbicacionYClima();
   actualizarHora();
   inicializarMenuMovil();
 
   // Configurar actualizaciones periódicas
   setInterval(actualizarHora, 1000); // Actualizar hora cada segundo
+<<<<<<< HEAD
   setInterval(obtenerClima, 600000); // Actualizar clima cada 10 minutos
 
   // Iniciar lluvia inmediatamente (para pruebas)
   // Puedes comentar estas líneas cuando quieras que funcione solo con la API
   setTimeout(() => {
     console.log("Iniciando lluvia manualmente para pruebas");
+=======
+  setInterval(obtenerUbicacionYClima, 600000); // Actualizar clima cada 10 minutos
+
+  // TEMPORAL: Forzar lluvia para pruebas (puedes comentar estas líneas después)
+  setTimeout(() => {
+    console.log("Forzando lluvia para pruebas");
+>>>>>>> feature/feature_branch_2
     iniciarLluvia();
     mostrarNubes();
   }, 1000);
@@ -67,11 +75,53 @@ function inicializarMenuMovil() {
 }
 
 /**
- * Obtiene datos del clima desde la API y actualiza la interfaz
+ * Obtiene la ubicación actual del usuario y luego obtiene el clima para esa ubicación
  */
-async function obtenerClima() {
+function obtenerUbicacionYClima() {
+  console.log("Obteniendo ubicación del usuario...");
+
+  // Verificar si el navegador soporta geolocalización
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      // Éxito - tenemos la ubicación
+      async (position) => {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        console.log(`Ubicación obtenida: Lat ${latitude}, Long ${longitude}`);
+
+        // Obtener el clima con las coordenadas del usuario
+        await obtenerClima(latitude, longitude);
+      },
+      // Error - no se pudo obtener la ubicación
+      (error) => {
+        console.error("Error obteniendo la ubicación:", error.message);
+        // Usar coordenadas predeterminadas (San José, Costa Rica)
+        obtenerClima(9.93, -84.08);
+      },
+      // Opciones
+      {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+      }
+    );
+  } else {
+    console.error("Geolocalización no soportada por este navegador");
+    // Usar coordenadas predeterminadas (San José, Costa Rica)
+    obtenerClima(9.93, -84.08);
+  }
+}
+
+/**
+ * Obtiene datos del clima desde la API y actualiza la interfaz
+ * @param {number} latitude - Latitud de la ubicación
+ * @param {number} longitude - Longitud de la ubicación
+ */
+async function obtenerClima(latitude, longitude) {
   try {
-    const url = 'https://api.open-meteo.com/v1/forecast?latitude=9.93&longitude=-84.08&current_weather=true';
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`;
+    console.log("Consultando API del clima:", url);
+
     const response = await fetch(url);
 
     if (!response.ok) {
@@ -83,6 +133,7 @@ async function obtenerClima() {
     let clima = data.current_weather.weathercode;
 
     console.log("Código de clima recibido:", clima);
+<<<<<<< HEAD
 
     // TEMPORAL: Si está lloviendo actualmente, forzar el código de lluvia
     // Puedes comentar estas líneas cuando quieras que vuelva a funcionar automáticamente
@@ -91,10 +142,15 @@ async function obtenerClima() {
       console.log("Forzando efecto de lluvia");
       clima = 61; // Código para lluvia ligera
     }
+=======
+>>>>>>> feature/feature_branch_2
 
     // Aplicar estilos según hora y clima
     aplicarEstilosPorHora(hora);
     aplicarEstilosPorClima(clima);
+
+    // Mostrar información del clima en la consola
+    mostrarInfoClima(clima, data.current_weather.temperature);
 
   } catch (error) {
     console.error("Error obteniendo el clima:", error);
@@ -106,6 +162,42 @@ async function obtenerClima() {
     iniciarLluvia();
     mostrarNubes();
   }
+}
+
+/**
+ * Muestra información del clima en la consola
+ * @param {number} codigoClima - Código del clima
+ * @param {number} temperatura - Temperatura actual
+ */
+function mostrarInfoClima(codigoClima, temperatura) {
+  const tiposClima = {
+    0: "Cielo despejado",
+    1: "Principalmente despejado",
+    2: "Parcialmente nublado",
+    3: "Nublado",
+    45: "Niebla",
+    48: "Niebla con escarcha",
+    51: "Llovizna ligera",
+    53: "Llovizna moderada",
+    55: "Llovizna intensa",
+    61: "Lluvia ligera",
+    63: "Lluvia moderada",
+    65: "Lluvia intensa",
+    66: "Lluvia helada ligera",
+    67: "Lluvia helada intensa",
+    71: "Nevada ligera",
+    73: "Nevada moderada",
+    75: "Nevada intensa",
+    80: "Chubascos ligeros",
+    81: "Chubascos moderados",
+    82: "Chubascos violentos",
+    95: "Tormenta eléctrica",
+    96: "Tormenta con granizo ligero",
+    99: "Tormenta con granizo fuerte"
+  };
+
+  const descripcion = tiposClima[codigoClima] || "Clima desconocido";
+  console.log(`Clima actual: ${descripcion} (${codigoClima}), Temperatura: ${temperatura}°C`);
 }
 
 /**
@@ -134,7 +226,7 @@ function aplicarEstilosPorHora(hora) {
   document.body.style.background = `linear-gradient(to bottom, ${colorFondoBody}, #f5f5f5)`;
 
   // Mantener el color del encabezado consistente con el diseño
-  const headerElement = document.querySelector('.header');
+  const headerElement = document.querySelector('.header__title');
   if (headerElement) {
     headerElement.style.backgroundColor = colorTitulo;
   }
@@ -184,16 +276,33 @@ function iniciarLluvia() {
   }
 
   // Crear gotas iniciales
+<<<<<<< HEAD
   for (let i = 0; i < 50; i++) {
+=======
+  for (let i = 0; i < 100; i++) {
+>>>>>>> feature/feature_branch_2
     crearGotaDeLluvia(rainContainer);
   }
 
   // Crear identificador único para este intervalo
   window.lluviaInterval = setInterval(() => {
     crearGotaDeLluvia(rainContainer);
+<<<<<<< HEAD
   }, 50); // Crear gotas más frecuentemente
 
   console.log("Efecto de lluvia iniciado");
+=======
+  }, 25); // Crear gotas más frecuentemente
+
+  // Mostrar mensaje en la consola
+  console.log("Efecto de lluvia iniciado");
+
+  // Verificar que el contenedor tenga gotas
+  setTimeout(() => {
+    const gotas = rainContainer.querySelectorAll('.raindrop');
+    console.log(`Número de gotas creadas: ${gotas.length}`);
+  }, 500);
+>>>>>>> feature/feature_branch_2
 }
 
 /**
@@ -208,6 +317,7 @@ function crearGotaDeLluvia(container) {
   drop.style.left = Math.random() * 100 + "vw";
 
   // Duración de la animación aleatoria
+<<<<<<< HEAD
   const duracion = Math.random() * 1.5 + 1; // Entre 1 y 2.5 segundos
   drop.style.animationDuration = duracion + "s";
 
@@ -216,6 +326,23 @@ function crearGotaDeLluvia(container) {
   drop.style.height = (15 * escala) + "px";
   drop.style.width = (2 * escala) + "px";
   drop.style.opacity = 0.7 + (escala * 0.3); // Más opaco si es más grande
+=======
+  const duracion = Math.random() * 1.5 + 0.8; // Entre 0.8 y 2.3 segundos
+  drop.style.animationDuration = duracion + "s";
+
+  // Tamaño aleatorio para dar sensación de profundidad
+  const escala = Math.random() * 0.7 + 0.5; // Entre 0.5 y 1.2
+  drop.style.height = (15 * escala) + "px";
+  drop.style.width = (2 * escala) + "px";
+  drop.style.opacity = 0.8 + (escala * 0.2); // Más opaco si es más grande
+
+  // Color azul con variación aleatoria
+  const azul = 200 + Math.floor(Math.random() * 55);
+  drop.style.backgroundColor = `rgba(100, ${azul}, 255, ${0.7 + (escala * 0.3)})`;
+
+  // Sombra para mayor visibilidad
+  drop.style.boxShadow = `0 0 3px rgba(100, ${azul}, 255, 0.5)`;
+>>>>>>> feature/feature_branch_2
 
   // Añadir al contenedor
   container.appendChild(drop);
@@ -275,7 +402,7 @@ function actualizarHora() {
   const formatoHora = fecha.toLocaleTimeString("es-ES");
 
   // Actualizar el elemento en el DOM
-  const elementoFechaHora = document.getElementById("fecha-hora");
+  const elementoFechaHora = document.querySelector("#fecha-hora p");
   if (elementoFechaHora) {
     elementoFechaHora.textContent = `${formatoFecha} - ${formatoHora}`;
   }
