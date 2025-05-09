@@ -1,10 +1,10 @@
-/*
+/**
  * Grupo Jiménez - Script principal
  * Funcionalidades:
- * - Obtención de datos climáticos
- * - Efectos visuales según clima y hora
- * - Actualización de fecha y hora en tiempo real
- * - Menú móvil responsivo
+ *  - Obtención de datos climáticos
+ *  - Efectos visuales según clima y hora
+ *  - Actualización de fecha y hora en tiempo real
+ *  - Menú móvil responsivo
  */
 
 // Esperar a que el DOM esté completamente cargado
@@ -21,20 +21,11 @@ function inicializarApp() {
 
   // Configurar actualizaciones periódicas
   setInterval(actualizarHora, 1000); // Actualizar hora cada segundo
-<<<<<<< HEAD
-  setInterval(obtenerClima, 600000); // Actualizar clima cada 10 minutos
-
-  // Iniciar lluvia inmediatamente (para pruebas)
-  // Puedes comentar estas líneas cuando quieras que funcione solo con la API
-  setTimeout(() => {
-    console.log("Iniciando lluvia manualmente para pruebas");
-=======
   setInterval(obtenerUbicacionYClima, 600000); // Actualizar clima cada 10 minutos
 
   // TEMPORAL: Forzar lluvia para pruebas (puedes comentar estas líneas después)
   setTimeout(() => {
     console.log("Forzando lluvia para pruebas");
->>>>>>> feature/feature_branch_2
     iniciarLluvia();
     mostrarNubes();
   }, 1000);
@@ -133,7 +124,6 @@ async function obtenerClima(latitude, longitude) {
     let clima = data.current_weather.weathercode;
 
     console.log("Código de clima recibido:", clima);
-<<<<<<< HEAD
 
     // TEMPORAL: Si está lloviendo actualmente, forzar el código de lluvia
     // Puedes comentar estas líneas cuando quieras que vuelva a funcionar automáticamente
@@ -142,8 +132,6 @@ async function obtenerClima(latitude, longitude) {
       console.log("Forzando efecto de lluvia");
       clima = 61; // Código para lluvia ligera
     }
-=======
->>>>>>> feature/feature_branch_2
 
     // Aplicar estilos según hora y clima
     aplicarEstilosPorHora(hora);
@@ -276,22 +264,13 @@ function iniciarLluvia() {
   }
 
   // Crear gotas iniciales
-<<<<<<< HEAD
-  for (let i = 0; i < 50; i++) {
-=======
   for (let i = 0; i < 100; i++) {
->>>>>>> feature/feature_branch_2
     crearGotaDeLluvia(rainContainer);
   }
 
   // Crear identificador único para este intervalo
   window.lluviaInterval = setInterval(() => {
     crearGotaDeLluvia(rainContainer);
-<<<<<<< HEAD
-  }, 50); // Crear gotas más frecuentemente
-
-  console.log("Efecto de lluvia iniciado");
-=======
   }, 25); // Crear gotas más frecuentemente
 
   // Mostrar mensaje en la consola
@@ -302,7 +281,6 @@ function iniciarLluvia() {
     const gotas = rainContainer.querySelectorAll('.raindrop');
     console.log(`Número de gotas creadas: ${gotas.length}`);
   }, 500);
->>>>>>> feature/feature_branch_2
 }
 
 /**
@@ -317,16 +295,6 @@ function crearGotaDeLluvia(container) {
   drop.style.left = Math.random() * 100 + "vw";
 
   // Duración de la animación aleatoria
-<<<<<<< HEAD
-  const duracion = Math.random() * 1.5 + 1; // Entre 1 y 2.5 segundos
-  drop.style.animationDuration = duracion + "s";
-
-  // Tamaño aleatorio para dar sensación de profundidad
-  const escala = Math.random() * 0.5 + 0.5; // Entre 0.5 y 1
-  drop.style.height = (15 * escala) + "px";
-  drop.style.width = (2 * escala) + "px";
-  drop.style.opacity = 0.7 + (escala * 0.3); // Más opaco si es más grande
-=======
   const duracion = Math.random() * 1.5 + 0.8; // Entre 0.8 y 2.3 segundos
   drop.style.animationDuration = duracion + "s";
 
@@ -342,7 +310,6 @@ function crearGotaDeLluvia(container) {
 
   // Sombra para mayor visibilidad
   drop.style.boxShadow = `0 0 3px rgba(100, ${azul}, 255, 0.5)`;
->>>>>>> feature/feature_branch_2
 
   // Añadir al contenedor
   container.appendChild(drop);
@@ -362,7 +329,9 @@ function detenerLluvia() {
   if (window.lluviaInterval) {
     clearInterval(window.lluviaInterval);
     const rainContainer = document.getElementById("rain-container");
-    rainContainer.innerHTML = "";
+    if (rainContainer) {
+      rainContainer.innerHTML = "";
+    }
   }
 }
 
@@ -371,18 +340,23 @@ function detenerLluvia() {
  */
 function mostrarNubes() {
   const fondoClima = document.getElementById("fondo-clima");
-  fondoClima.style.backgroundImage = "url('assets/nubes.jpg')";
-  fondoClima.style.backgroundSize = "cover";
-  fondoClima.style.backgroundRepeat = "no-repeat";
-  fondoClima.style.backgroundPosition = "center";
-  fondoClima.style.opacity = "0.3"; // Hacer las nubes semi-transparentes
+  if (fondoClima) {
+    fondoClima.style.backgroundImage = "url('assets/nubes.jpg')";
+    fondoClima.style.backgroundSize = "cover";
+    fondoClima.style.backgroundRepeat = "no-repeat";
+    fondoClima.style.backgroundPosition = "center";
+    fondoClima.style.opacity = "0.3"; // Hacer las nubes semi-transparentes
+  }
 }
 
 /**
  * Oculta el fondo de nubes
  */
 function ocultarNubes() {
-  document.getElementById("fondo-clima").style.backgroundImage = "none";
+  const fondoClima = document.getElementById("fondo-clima");
+  if (fondoClima) {
+    fondoClima.style.backgroundImage = "none";
+  }
 }
 
 /**
